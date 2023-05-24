@@ -1,0 +1,531 @@
+Please enter a MongoDB connection string (Default: mongodb://localhost/): mongo
+mongo
+Current Mongosh Log ID: 646a2e6ded7d13f38e3a9ac9
+Connecting to:          mongodb://127.0.0.1:27017/mongo?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.9.0
+Using MongoDB:          6.0.6
+Using Mongosh:          1.9.0
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-18T20:42:07.760+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+mongo> use samiksha;
+switched to db samiksha
+samiksha> db.products.insertOne({name:"cake",flavour:"cream n cookie",price:800,ratings:5});
+{
+  acknowledged: true,
+  insertedId: ObjectId("646a2edded7d13f38e3a9aca")
+}
+
+samiksha> db.products.insertMany([{name:"pastry",flavour:"butterscotch",price:80,ratings:4.8},{name:"pastry",flavour:"mango",price:50,ratings:4.2}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("646a2f76ed7d13f38e3a9acb"),
+    '1': ObjectId("646a2f76ed7d13f38e3a9acc")
+  }
+}
+
+
+samiksha> db.products.find();
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    name: 'cake',
+    flavour: 'chocolate',
+    price: 300,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467bc2f2778d322af71d20c"),
+    name: 'cake',
+    flavour: 'vanilla',
+    price: 200,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    name: 'cake',
+    flavour: 'black forest',
+    price: 250,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    name: 'cake',
+    flavour: 'choco chips',
+    price: 450,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    name: 'pastry',
+    flavour: 'choco current',
+    price: 90,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f6"),
+    name: 'cheesecake',
+    flavour: 'pineapple',
+    price: 420,
+    ratings: 4.9,
+    lastModified: ISODate("2023-05-19T18:37:57.249Z")
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f7"),
+    name: 'cheesecake',
+    flavour: 'pineapple',
+    price: 420,
+    ratings: 4,
+    lastModified: ISODate("2023-05-19T18:37:57.251Z")
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    name: 'cake',
+    flavour: 'cream n cookie',
+    price: 800,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    name: 'pastry',
+    flavour: 'mango',
+    price: 50,
+    ratings: 4.2
+  }
+
+samiksha> db.products.updateOne({name:"cheesecake"},{$set:{flavour:"choco lava",price:750},$currentDate:{lastModified:true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+samiksha> db.products.find();
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    name: 'cake',
+    flavour: 'chocolate',
+    price: 300,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467bc2f2778d322af71d20c"),
+    name: 'cake',
+    flavour: 'vanilla',
+    price: 200,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    name: 'cake',
+    flavour: 'black forest',
+    price: 250,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    name: 'cake',
+    flavour: 'choco chips',
+    price: 450,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    name: 'pastry',
+    flavour: 'choco current',
+    price: 90,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f6"),
+    name: 'cheesecake',
+    flavour: 'choco lava',
+    price: 750,
+    ratings: 4.9,
+    lastModified: ISODate("2023-05-21T14:52:24.177Z")
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f7"),
+    name: 'cheesecake',
+    flavour: 'pineapple',
+    price: 420,
+    ratings: 4,
+    lastModified: ISODate("2023-05-19T18:37:57.251Z")
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    name: 'cake',
+    flavour: 'cream n cookie',
+    price: 800,
+    ratings: 5
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    name: 'pastry',
+    flavour: 'mango',
+    price: 50,
+    ratings: 4.2
+  }
+]
+
+samiksha> db.products.updateMany({ratings:5},{$set:{reviews:"Best"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+samiksha> db.products.find();
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    name: 'cake',
+    flavour: 'chocolate',
+    price: 300,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bc2f2778d322af71d20c"),
+    name: 'cake',
+    flavour: 'vanilla',
+    price: 200,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    name: 'cake',
+    flavour: 'black forest',
+    price: 250,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    name: 'cake',
+    flavour: 'choco chips',
+    price: 450,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    name: 'pastry',
+    flavour: 'choco current',
+    price: 90,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f6"),
+    name: 'cheesecake',
+    flavour: 'choco lava',
+    price: 750,
+    ratings: 4.9,
+    lastModified: ISODate("2023-05-21T14:52:24.177Z")
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f7"),
+    name: 'cheesecake',
+    flavour: 'pineapple',
+    price: 420,
+    ratings: 4,
+    lastModified: ISODate("2023-05-19T18:37:57.251Z")
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    name: 'cake',
+    flavour: 'cream n cookie',
+    price: 800,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    name: 'pastry',
+    flavour: 'mango',
+    price: 50,
+    ratings: 4.2
+  }
+]
+
+samiksha> db.products.findOne();
+{
+  _id: ObjectId("64650f762700e22a7b6e41b1"),
+  name: 'cake',
+  flavour: 'chocolate',
+  price: 300,
+  ratings: 5,
+  reviews: 'Best'
+}
+
+samiksha> db.products.find({},{name:"cake",ratings:5});
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    ratings: 5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467bc2f2778d322af71d20c"),
+    ratings: 4.5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    ratings: 4.8,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    ratings: 5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    ratings: 4.5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    ratings: 5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f6"),
+    ratings: 4.9,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f7"),
+    ratings: 4,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    ratings: 5,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    ratings: 4.8,
+    name: 'cake'
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    ratings: 4.2,
+    name: 'cake'
+  }
+]
+
+samiksha> db.products.find({},{_id:0,name:"pastry",ratings:4.2});
+[
+  { ratings: 5, name: 'pastry' },
+  { ratings: 4.5, name: 'pastry' },
+  { ratings: 4.8, name: 'pastry' },
+  { ratings: 5, name: 'pastry' },
+  { ratings: 4.5, name: 'pastry' },
+  { ratings: 5, name: 'pastry' },
+  { ratings: 4.9, name: 'pastry' },
+  { ratings: 4, name: 'pastry' },
+  { ratings: 5, name: 'pastry' },
+  { ratings: 4.8, name: 'pastry' },
+  { ratings: 4.2, name: 'pastry' }
+]
+
+samiksha> db.products.deleteOne({name:"cake",flavour:"vanilla"});
+{ acknowledged: true, deletedCount: 1 }
+samiksha> db.products.find();
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    name: 'cake',
+    flavour: 'chocolate',
+    price: 300,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    name: 'cake',
+    flavour: 'black forest',
+    price: 250,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    name: 'cake',
+    flavour: 'choco chips',
+    price: 450,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    name: 'pastry',
+    flavour: 'choco current',
+    price: 90,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f6"),
+    name: 'cheesecake',
+    flavour: 'choco lava',
+    price: 750,
+    ratings: 4.9,
+    lastModified: ISODate("2023-05-21T14:52:24.177Z")
+  },
+  {
+    _id: ObjectId("6467c020cee64b38b43c05f7"),
+    name: 'cheesecake',
+    flavour: 'pineapple',
+    price: 420,
+    ratings: 4,
+    lastModified: ISODate("2023-05-19T18:37:57.251Z")
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    name: 'cake',
+    flavour: 'cream n cookie',
+    price: 800,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    name: 'pastry',
+    flavour: 'mango',
+    price: 50,
+    ratings: 4.2
+  }
+]
+
+samiksha> db.products.deleteMany({name:"cheesecake"});
+{ acknowledged: true, deletedCount: 2 }
+samiksha> db.products.find();
+[
+  {
+    _id: ObjectId("64650f762700e22a7b6e41b1"),
+    name: 'cake',
+    flavour: 'chocolate',
+    price: 300,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bc9f93e887fca64fa622"),
+    name: 'cake',
+    flavour: 'black forest',
+    price: 250,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("6467bd5b54d62e47782b672f"),
+    name: 'cake',
+    flavour: 'choco chips',
+    price: 450,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f4"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.5
+  },
+  {
+    _id: ObjectId("6467bf77cee64b38b43c05f5"),
+    name: 'pastry',
+    flavour: 'choco current',
+    price: 90,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("646a2edded7d13f38e3a9aca"),
+    name: 'cake',
+    flavour: 'cream n cookie',
+    price: 800,
+    ratings: 5,
+    reviews: 'Best'
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acb"),
+    name: 'pastry',
+    flavour: 'butterscotch',
+    price: 80,
+    ratings: 4.8
+  },
+  {
+    _id: ObjectId("646a2f76ed7d13f38e3a9acc"),
+    name: 'pastry',
+    flavour: 'mango',
+    price: 50,
+    ratings: 4.2
+  }
+]
